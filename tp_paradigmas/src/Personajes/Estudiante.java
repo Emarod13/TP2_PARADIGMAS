@@ -1,13 +1,17 @@
 package Personajes;
 
+import java.util.Set;
+
+import Hechizos.HechizoStrategy;
+
 public class Estudiante extends Mago {
 
-	private static String nombre;
 	private static int nivel_de_magia = 2;
 	private static int puntos_de_vida = 500;
+	private static int energia = 300;
 	
-	public Estudiante() {
-		super(nombre, nivel_de_magia, puntos_de_vida);
+	public Estudiante(String nombre, Set<HechizoStrategy> hechizos ) {
+		super(nombre, nivel_de_magia, puntos_de_vida, energia, hechizos);
 		// TODO Auto-generated constructor stub
 	}
 

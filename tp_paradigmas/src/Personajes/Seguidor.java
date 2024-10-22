@@ -1,9 +1,17 @@
 package Personajes;
 
-public class Seguidor extends Mortifago{
+import java.util.Set;
 
-	public Seguidor(String nombre, int nivel_de_magia, int puntos_de_vida) {
-		super(nombre, nivel_de_magia, puntos_de_vida);
+import Hechizos.HechizoStrategy;
+
+public class Seguidor extends Mortifago{
+	
+	private static int nivel_de_magia = 2;
+	private static int puntos_de_vida = 500;
+	private static int energia = 300;
+
+	public Seguidor(String nombre, Set<HechizoStrategy> hechizos ) {
+		super(nombre, nivel_de_magia, puntos_de_vida, energia, hechizos);
 		// TODO Auto-generated constructor stub
 	}
 

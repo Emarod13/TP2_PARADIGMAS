@@ -5,14 +5,13 @@ import java.util.List;
 import java.util.Set;
 
 import Hechizos.HechizoFactory;
+import Hechizos.HechizoStrategy;
 
 public abstract class Personaje {
 	protected String nombre;
 	protected int nivel_de_magia;
 	protected int puntos_de_vida;
-	
-
-	protected Set<HechizoFactory> lista_de_hechizos;
+	protected Set<HechizoStrategy> lista_de_hechizos;
 	protected boolean desarmado = false;
 	protected boolean protegido = false;
 	protected boolean vivo = true;
@@ -20,11 +19,11 @@ public abstract class Personaje {
 	protected int energia;
 	protected final int energia_inicial;
 	
-	public Personaje(String nombre, int nivel_de_magia, int puntos_de_vida, int energia) {
+	public Personaje(String nombre, int nivel_de_magia, int puntos_de_vida, int energia, Set<HechizoStrategy> hechizos) {
 		this.nombre = nombre;
 		this.nivel_de_magia = nivel_de_magia;
 		this.puntos_de_vida = puntos_de_vida;
-		this.lista_de_hechizos = new HashSet<>();
+		this.lista_de_hechizos = hechizos;
 		this.vida_inicial = puntos_de_vida;
 		this.energia = energia;
 		this.energia_inicial = energia;
@@ -55,7 +54,7 @@ public abstract class Personaje {
 		this.puntos_de_vida = puntos_de_vida;
 	}
 
-	public Set<HechizoFactory> getLista_de_hechizos() {
+	public Set<HechizoStrategy> getLista_de_hechizos() {
 		return lista_de_hechizos;
 	}
 
