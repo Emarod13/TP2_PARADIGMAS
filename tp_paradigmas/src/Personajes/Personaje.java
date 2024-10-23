@@ -1,7 +1,9 @@
 package Personajes;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import Hechizos.HechizoFactory;
@@ -12,8 +14,7 @@ public abstract class Personaje {
 	protected int nivel_de_magia;
 	protected int puntos_de_vida;
 	protected Set<HechizoStrategy> lista_de_hechizos;
-	protected boolean desarmado = false;
-	protected boolean protegido = false;
+	protected Map<String,Integer> efectos_aplicados;
 	protected boolean vivo = true;
 	protected final int vida_inicial;
 	protected int energia;
@@ -27,6 +28,7 @@ public abstract class Personaje {
 		this.vida_inicial = puntos_de_vida;
 		this.energia = energia;
 		this.energia_inicial = energia;
+		this.efectos_aplicados = new HashMap<>();
 		
 	}
 	
@@ -60,18 +62,13 @@ public abstract class Personaje {
 
 
 	public boolean isDesarmado() {
-		return desarmado;
+		return efectos_aplicados.containsKey("Desarmado") && efectos_aplicados.get("Desarmado") > 0;
 	}
 
-	public void setDesarmado(boolean desarmado) {
-		this.desarmado = desarmado;
-	}
 	public boolean isProtegido() {
-		return this.protegido;
+		return efectos_aplicados.containsKey("Protegido") && efectos_aplicados.get("Protegido") > 0;
 	}
-	public void setProtegido(boolean protegido) {
-		this.protegido=protegido;
-	}
+	
 
 	public int getVida_inicial() {
 		return vida_inicial;
@@ -90,6 +87,35 @@ public abstract class Personaje {
 	public int getEnergia() {
 		return this.energia;
 	}
+	
+	public void aplicarEfecto(String efecto, int duracion) {
+        efectos_aplicados.put(efecto, duracion); // Aplica un efecto con una duración
+    }
+
+    public void procesarEfectos() {
+        // Itera sobre los efectos y los aplica en cada round
+    	efectos_aplicados.forEach((efecto, duracion) -> {
+            if (duracion > 0) {
+                switch (efecto) {
+                    case "Sangrado":
+                        puntos_de_vida -= 10; // Daño por sangrado
+                        System.out.println(this + " sufre 10 de daño por sangrado");
+                        break;
+                    // Puedes agregar otros efectos aquí
+                    case "Desarmado":
+                    	System.out.println(this + "esta desarmado, no puede pelear");
+                    	break;
+                    case "Protegido":
+                    	System.out.println(this + "esta protegido, no puede ser atacado");
+                    	break;
+                }
+                efectos_aplicados.put(efecto, duracion - 1); // Reducir duración del efecto
+            }
+        });
+
+        // Eliminar efectos que ya no tienen duración
+    	efectos_aplicados.entrySet().removeIf(entry -> entry.getValue() <= 0);
+    }
 
 	
 }

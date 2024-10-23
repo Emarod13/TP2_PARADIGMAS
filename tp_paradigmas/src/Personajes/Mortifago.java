@@ -11,12 +11,12 @@ public class Mortifago extends Personaje {
 		// TODO Auto-generated constructor stub
 	}
 	public void atacar(Mago m) {
-		if(this.desarmado == false) {
+		if(this.isDesarmado() == false) {
 			// funcionalidad
 		}
 	}
 	public void asistir(Mortifago m) {
-		if(this.desarmado == false) {
+		if(this.isDesarmado() == false) {
 			// funcionalidad
 		}
 	}

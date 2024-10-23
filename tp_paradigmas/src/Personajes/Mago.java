@@ -11,12 +11,12 @@ public class Mago extends Personaje {
 	}
 
 	public void atacar(Mortifago m) {
-		if(this.desarmado == false) {
+		if(this.isDesarmado() == false) {
 			// funcionalidad
 		}
 	}
 	public void asistir(Mago m) {
-		if(this.desarmado == false) {
+		if(this.isDesarmado() == false) {
 			//funcionalidad
 		}
 		
