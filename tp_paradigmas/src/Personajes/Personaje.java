@@ -94,14 +94,14 @@ public abstract class Personaje {
 
     public void procesarEfectos() {
         // Itera sobre los efectos y los aplica en cada round
+    	final int DAÑO_SANGRADO=10;
     	efectos_aplicados.forEach((efecto, duracion) -> {
             if (duracion > 0) {
                 switch (efecto) {
                     case "Sangrado":
-                        puntos_de_vida -= 10; // Daño por sangrado
+                        puntos_de_vida -= DAÑO_SANGRADO; // Daño por sangrado
                         System.out.println(this + " sufre 10 de daño por sangrado");
                         break;
-                    // Puedes agregar otros efectos aquí
                     case "Desarmado":
                     	System.out.println(this + "esta desarmado, no puede pelear");
                     	break;
