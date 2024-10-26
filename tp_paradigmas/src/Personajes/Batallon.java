@@ -25,6 +25,11 @@ public class Batallon {
 	public void atacar(Batallon b) {
 		
 	}
+	public void procesarEfectos() {
+		for(Personaje p : this.miembros) {
+			p.procesarEfectos();
+		}
+	}
 
 	
 	

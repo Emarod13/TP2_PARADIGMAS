@@ -101,6 +101,9 @@ public abstract class Personaje {
                     case "Sangrado":
                         puntos_de_vida -= DAÑO_SANGRADO; // Daño por sangrado
                         System.out.println(this + " sufre 10 de daño por sangrado");
+                        if(this.puntos_de_vida<=0) {
+                        	this.morir();
+                        }
                         break;
                     case "Desarmado":
                     	System.out.println(this + "esta desarmado, no puede pelear");
