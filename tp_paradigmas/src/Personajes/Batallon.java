@@ -23,12 +23,18 @@ public class Batallon {
 		return true;
 	}
 	public void atacar(Batallon b) {
+		for(Personaje p : miembros) {
+			p.atacar(b.miembros.get(0));
+		}
 		
 	}
 	public void procesarEfectos() {
 		for(Personaje p : this.miembros) {
 			p.procesarEfectos();
 		}
+	}
+	public void agregarPesonaje(Personaje p) {
+		miembros.add(p);
 	}
 
 	

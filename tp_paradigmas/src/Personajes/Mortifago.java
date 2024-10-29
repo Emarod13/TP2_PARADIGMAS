@@ -10,15 +10,17 @@ public class Mortifago extends Personaje {
 		super(nombre, nivel_de_magia, puntos_de_vida, energia, hechizos);
 		// TODO Auto-generated constructor stub
 	}
-	public void atacar(Mago m) {
-		if(this.isDesarmado() == false) {
-			// funcionalidad
-		}
+
+	@Override
+	public void atacar(Personaje p) {
+		// TODO Auto-generated method stub
+		
 	}
-	public void asistir(Mortifago m) {
-		if(this.isDesarmado() == false) {
-			// funcionalidad
-		}
+
+	@Override
+	public void defender(Personaje p) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

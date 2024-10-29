@@ -10,15 +10,17 @@ public class Mago extends Personaje {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void atacar(Mortifago m) {
-		if(this.isDesarmado() == false) {
-			// funcionalidad
-		}
-	}
-	public void asistir(Mago m) {
-		if(this.isDesarmado() == false) {
-			//funcionalidad
-		}
+	@Override
+	public void atacar(Personaje p) {
+		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void defender(Personaje p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 }

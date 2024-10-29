@@ -119,6 +119,8 @@ public abstract class Personaje {
         // Eliminar efectos que ya no tienen duración
     	efectos_aplicados.entrySet().removeIf(entry -> entry.getValue() <= 0);
     }
-
+    public abstract void atacar(Personaje p);
+    
+    public abstract void defender(Personaje p);
 	
 }
