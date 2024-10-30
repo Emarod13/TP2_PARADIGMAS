@@ -1,5 +1,6 @@
 package Personajes;
 
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -7,53 +8,125 @@ import Hechizos.HechizoStrategy;
 
 public class PersonajeFactory {
 
-	public static Mago crearMago(String nombre, String tipo, Set<HechizoStrategy> hechizos) {
-		
-		switch(tipo) {
+	public static Mago crearMago(String nombre, String tipo) {
+		Mago m = null;
+
+		switch (tipo) {
 		case "Auror":
-			return new Auror(nombre, hechizos);
+			m = new Auror(nombre, inicializarAuror());
+			return m;
 		case "Profesor":
-			return new Profesor(nombre,hechizos);
+			m = new Profesor(nombre, inicializarAuror());
+	
+			return m;
 		case "Estudiante":
-			return new Estudiante(nombre,hechizos);
+			m = new Estudiante(nombre, inicializarAuror());
+
+			return m;
 		default:
-			return null;
+			return m;
 		}
-		
-		
+
 	}
-public static Mortifago crearMortifago(String nombre, String tipo, Set<HechizoStrategy> hechizos) {
+	public static Mago crearMago(String tipo) {
 		
-		switch(tipo) {
+
+		Mago m = null;
+
+		switch (tipo) {
 		case "Auror":
-			return new Seguidor(nombre, hechizos);
+			m = new Auror("", inicializarAuror());
+
+			return m;
 		case "Profesor":
-			return new Comandante(nombre,hechizos);
+			m = new Profesor("", inicializarProfesor());
+
+			return m;
+		case "Estudiante":
+			m = new Estudiante("", inicializarEstudiante());
+	
+			return m;
+		default:
+			return m;
+		}
+
+	}
+
+	
+	public static Mortifago crearMortifago(String nombre, String tipo) {
+		
+
+		switch (tipo) {
+		case "Seguidor":
+			return new Seguidor(nombre, inicializarSeguidor());
+		case "Comandante":
+			return new Comandante(nombre, inicializarComandante());
 		default:
 			return null;
 		}
-		
-		
+
+	}
+	
+	
+	public static Mortifago crearMortifago(String tipo) {
+
+		switch (tipo) {
+		case "Seguidor":
+			return new Seguidor("",inicializarSeguidor());
+		case "Comandante":
+			return new Comandante("", inicializarComandante());
+		default:
+			return null;
+		}
+
+	}
+
+	public Mago crearMagoAleatorio() {
+		Random rand = new Random();
+		int numeroAleatorio = rand.nextInt(2);
+
+		switch (numeroAleatorio) {
+		case 0:
+			return crearMago("Profesor");
+		case 1:
+			return crearMago("Auror");
+
+		}
+		return crearMago("Estudiante"); // case 2:
+
+	}
+
+	public Mortifago crearMortifagoAleatorio() {
+		Random rand = new Random();
+		int numeroAleatorio = rand.nextInt(1);
+
+		if (numeroAleatorio == 0) {
+			return crearMortifago("Comandante");
+		}
+		return crearMortifago("Seguidor");
+
+	}
+	
+	private static Map<String, HechizoStrategy> inicializarAuror(){
+		return null;
+	}
+	
+	private static Map<String, HechizoStrategy> inicializarEstudiante() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	private static Map<String, HechizoStrategy> inicializarProfesor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	private static Map<String, HechizoStrategy> inicializarComandante() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	private static Map<String, HechizoStrategy> inicializarSeguidor() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
-/*
- * public Mago crearMagoAleatorio() { Random rand = new Random(); int
- * numeroAleatorio = rand.nextInt(2);
- * 
- * switch (numeroAleatorio) { case 0: return crearProfesor(); case 1: return
- * crearAuror();
- * 
- * } return crearEstudiante(); // case 2:
- * 
- * }
- * 
- * public Mortifago crearMortifagoAleatorio() { Random rand = new Random(); int
- * numeroAleatorio = rand.nextInt(1);
- * 
- * if(numeroAleatorio == 0) { return crearComandante(); } return
- * crearSeguidor();
- * 
- * }
- */
 

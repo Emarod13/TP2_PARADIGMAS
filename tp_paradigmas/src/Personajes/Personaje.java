@@ -13,14 +13,14 @@ public abstract class Personaje {
 	protected String nombre;
 	protected int nivel_de_magia;
 	protected int puntos_de_vida;
-	protected Set<HechizoStrategy> lista_de_hechizos;
+	protected Map<String,HechizoStrategy> lista_de_hechizos;
 	protected Map<String,Integer> efectos_aplicados;
 	protected boolean vivo = true;
 	protected final int vida_inicial;
 	protected int energia;
 	protected final int energia_inicial;
 	
-	public Personaje(String nombre, int nivel_de_magia, int puntos_de_vida, int energia, Set<HechizoStrategy> hechizos) {
+	public Personaje(String nombre, int nivel_de_magia, int puntos_de_vida, int energia, Map<String,HechizoStrategy> hechizos) {
 		this.nombre = nombre;
 		this.nivel_de_magia = nivel_de_magia;
 		this.puntos_de_vida = puntos_de_vida;
@@ -56,10 +56,12 @@ public abstract class Personaje {
 		this.puntos_de_vida = puntos_de_vida;
 	}
 
-	public Set<HechizoStrategy> getLista_de_hechizos() {
+	public Map<String, HechizoStrategy> getLista_de_hechizos() {
 		return lista_de_hechizos;
 	}
-
+	public void setLista_de_hechizos(Map<String, HechizoStrategy> hechizos) {
+		this.lista_de_hechizos = hechizos;
+	}
 
 	public boolean isDesarmado() {
 		return efectos_aplicados.containsKey("Desarmado") && efectos_aplicados.get("Desarmado") > 0;
