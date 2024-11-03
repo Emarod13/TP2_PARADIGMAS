@@ -2,9 +2,13 @@ package Hechizos;
 
 import Personajes.Personaje;
 
-public class SectumSempra implements HechizoStrategy { // HACE DAÑO Y APLICA SANGRADO
+public class SectumSempra extends HechizoStrategy { // COMANDANTE, SEGUIDOR
 	private static int DAÑO = 100;
 	private static int DURACION = 3;
+	
+	public SectumSempra() {
+		super();
+	}
 
 	@Override
 	public void ejecutar(Personaje p) {
@@ -17,6 +21,18 @@ public class SectumSempra implements HechizoStrategy { // HACE DAÑO Y APLICA SA
 		}
 		
 
+	}
+
+	@Override
+	public Object getTipo() {
+		// TODO Auto-generated method stub
+		return "Ataque";
+	}
+
+	@Override
+	public String getNombre() {
+		// TODO Auto-generated method stub
+		return "SectumSempra";
 	}
 
 }

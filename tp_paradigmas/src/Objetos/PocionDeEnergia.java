@@ -2,7 +2,7 @@ package Objetos;
 
 import Personajes.Personaje;
 
-public class PocionDeEnergia extends Pocion {
+public class PocionDeEnergia implements Consumible {
 	protected int energia;
 	
 	public PocionDeEnergia(int energia) {

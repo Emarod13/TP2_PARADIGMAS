@@ -2,7 +2,7 @@ package Objetos;
 
 import Personajes.Personaje;
 
-public class PocionDeVida extends Pocion {
+public class PocionDeVida implements Consumible  {
 	protected int efecto;
 	
 	public PocionDeVida(int puntos_de_vida){

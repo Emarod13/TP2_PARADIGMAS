@@ -2,7 +2,7 @@ package Hechizos;
 
 import Personajes.Personaje;
 
-public class AvadaKedavra implements HechizoStrategy {
+public class AvadaKedavra extends HechizoStrategy { // COMANDANTE
 	private static double PORCENTAJE = 0.3;
 	@Override
 	public void ejecutar(Personaje p) {
@@ -10,6 +10,16 @@ public class AvadaKedavra implements HechizoStrategy {
 			p.morir();
 		}
 		
+	}
+	@Override
+	public Object getTipo() {
+		// TODO Auto-generated method stub
+		return "Ataque";
+	}
+	@Override
+	public String getNombre() {
+		// TODO Auto-generated method stub
+		return "AvadaKedavra";
 	}
 	
 	

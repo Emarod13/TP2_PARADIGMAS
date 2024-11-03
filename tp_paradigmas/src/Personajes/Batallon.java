@@ -13,6 +13,9 @@ public class Batallon {
 	public List<Personaje> getMiembros() {
 		return miembros;
 	}
+	public void agregarPersonaje(Personaje p) {
+		this.miembros.add(p);	
+	}
 	public boolean tienePersonajesVivos() {
 		
 		for(Personaje p : miembros) {
@@ -24,7 +27,7 @@ public class Batallon {
 	}
 	public void atacar(Batallon b) {
 		for(Personaje p : miembros) {
-			p.atacar(b.miembros.get(0));
+			
 		}
 		
 	}

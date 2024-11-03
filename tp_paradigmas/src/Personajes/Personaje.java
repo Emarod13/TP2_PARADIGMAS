@@ -121,8 +121,38 @@ public abstract class Personaje {
         // Eliminar efectos que ya no tienen duración
     	efectos_aplicados.entrySet().removeIf(entry -> entry.getValue() <= 0);
     }
-    public abstract void atacar(Personaje p);
+    public void atacar(Personaje enemigo, String hechizoNombre) {
+        HechizoStrategy hechizo = lista_de_hechizos.get(hechizoNombre);
+        if (hechizo != null && energia >= hechizo.getCostoEnergia() && hechizo.getTipo().equals("Ataque")) {
+            hechizo.ejecutar(enemigo);
+            energia -= hechizo.getCostoEnergia();
+            System.out.println(nombre + " ataca a " + enemigo.getNombre() + " con " + hechizo.getNombre());
+        } else {
+            System.out.println(nombre + " no puede usar " + hechizoNombre + " por falta de energía o por tipo de hechizo incorrecto.");
+        }
+    }
+
+    public void defender(String hechizoNombre) {
+        HechizoStrategy hechizo = lista_de_hechizos.get(hechizoNombre);
+        if (hechizo != null && energia >= hechizo.getCostoEnergia() && hechizo.getTipo().equals("Defensa")) {
+            hechizo.ejecutar(this);
+            energia -= hechizo.getCostoEnergia();
+            System.out.println(nombre + " se defiende con " + hechizo.getNombre());
+        } else {
+            System.out.println(nombre + " no puede usar " + hechizoNombre + " por falta de energía o por tipo de hechizo incorrecto.");
+        }
+    }
     
-    public abstract void defender(Personaje p);
+    public boolean estaDebilitado() {
+    	return (this.puntos_de_vida / this.vida_inicial) <= 0.4; 
+    	
+    }
+
+	public void consumir(Personaje personaje) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected abstract String getTipo(); // usado mas que nada para las consultas de prolog
 	
 }

@@ -12,16 +12,12 @@ public class Mortifago extends Personaje {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public void atacar(Personaje p) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
-	public void defender(Personaje p) {
+	protected String getTipo() {
 		// TODO Auto-generated method stub
-		
+		return "Mortifago";
 	}
 
 }

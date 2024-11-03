@@ -12,15 +12,9 @@ public class Mago extends Personaje {
 	}
 
 	@Override
-	public void atacar(Personaje p) {
+	protected String getTipo() {
 		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void defender(Personaje p) {
-		// TODO Auto-generated method stub
-		
+		return "Mago";
 	}
 
 	

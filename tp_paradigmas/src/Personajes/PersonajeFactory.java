@@ -16,11 +16,11 @@ public class PersonajeFactory {
 			m = new Auror(nombre, inicializarAuror());
 			return m;
 		case "Profesor":
-			m = new Profesor(nombre, inicializarAuror());
+			m = new Profesor(nombre, inicializarProfesor());
 	
 			return m;
 		case "Estudiante":
-			m = new Estudiante(nombre, inicializarAuror());
+			m = new Estudiante(nombre, inicializarEstudiante());
 
 			return m;
 		default:
