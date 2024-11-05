@@ -4,16 +4,20 @@ import Personajes.Personaje;
 
 public class Protego extends HechizoStrategy { // ESTUDIANTE
 	
-	public static int DURACION=3;
+	private static int DURACION=3;
+	private static int COSTO=30;
+	public Protego() {
+		super(COSTO,"Defensa");
+	}
 	@Override
 	public void ejecutar(Personaje p) {
 		p.aplicarEfecto("Protegido", DURACION);
 		
 	}
 	@Override
-	public Object getTipo() {
+	public String getTipo() {
 		// TODO Auto-generated method stub
-		return "Defensa";
+		return this.tipo;
 	}
 	@Override
 	public String getNombre() {

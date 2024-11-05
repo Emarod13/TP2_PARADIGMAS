@@ -62,6 +62,7 @@ public class Juego {
         // Obtener la acción decidida por Prolog
         String accion = consulta.oneSolution().get("Accion").toString();
         ejecutarAccion(accion, personaje, enemigos);
+        actualizarPersonajeEnProlog(personaje);
     }
 
     /**
@@ -75,6 +76,7 @@ public class Juego {
                     String hechizoAtaque = elegirHechizo(personaje, "Ataque");
                     if (hechizoAtaque != null) {
                         personaje.atacar(objetivo, hechizoAtaque);
+                        actualizarPersonajeEnProlog(objetivo);
                         System.out.println(personaje.getNombre() + " ataca a " + objetivo.getNombre() + " con " + hechizoAtaque);
                     } else {
                         System.out.println(personaje.getNombre() + " no tiene hechizos de ataque disponibles.");
@@ -193,5 +195,36 @@ public class Juego {
         }
 
         System.out.println("Personaje " + nombre + " actualizado en Prolog.");
+    }
+    public void cargarHechizosEnProlog(Personaje personaje) {
+        String nombrePersonaje = personaje.getNombre();
+
+        // Primero eliminamos los hechos de hechizos existentes para este personaje en Prolog
+        String retractHechizos = String.format("retractall(hechizo(_, '%s', _, _)).", nombrePersonaje);
+        Query retractQuery = new Query(retractHechizos);
+        retractQuery.hasSolution();
+
+        // Cargar cada hechizo del personaje en Prolog
+        Map<String, HechizoStrategy> hechizos = personaje.getLista_de_hechizos();
+        for (Map.Entry<String, HechizoStrategy> entry : hechizos.entrySet()) {
+            String nombreHechizo = entry.getKey();
+            HechizoStrategy hechizo = entry.getValue();
+            int costo = hechizo.getCostoEnergia();
+            String tipo = hechizo.getTipo(); // Puede ser "ataque" o "defensa"
+
+            // Crear el hecho en Prolog
+            String assertHechizo = String.format("assert(hechizo('%s', '%s', %d, '%s')).",
+                    nombreHechizo, nombrePersonaje, costo, tipo);
+            Query assertQuery = new Query(assertHechizo);
+            assertQuery.hasSolution();
+        }
+
+        System.out.println("Hechizos del personaje " + nombrePersonaje + " cargados en Prolog.");
+    }
+    public void cargarHechizosEnProlog(List<Personaje> personajes) {
+    	for(Personaje p : personajes) {
+    		cargarHechizosEnProlog(p);
+    	}
+    	
     }
 }

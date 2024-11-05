@@ -4,20 +4,24 @@ import Personajes.Personaje;
 
 public class Episkey extends HechizoStrategy {
 	private static int CURACION = 100;
+	private static int COSTO=30;
+	public Episkey() {
+		super(COSTO,"Defensa");
+	}
 	@Override
 	public void ejecutar(Personaje p) {
 		p.setPuntos_de_vida(p.getPuntos_de_vida()+CURACION);
 		
 	}
 	@Override
-	public Object getTipo() {
+	public String getTipo() {
 		// TODO Auto-generated method stub
 		return "Defensa";
 	}
 	@Override
 	public String getNombre() {
 		// TODO Auto-generated method stub
-		return "Episkey";
+		return this.tipo;
 	}
 	
 	

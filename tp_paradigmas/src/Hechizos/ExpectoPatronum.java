@@ -4,20 +4,21 @@ import Personajes.Personaje;
 
 public class ExpectoPatronum extends HechizoStrategy { // PROFESOR
 	private static int PODER = 100;
+	private static int COSTO=30;
+	public ExpectoPatronum() {
+		super(COSTO,"Ataque");
+	}
 
 	@Override
 	public void ejecutar(Personaje p) {
 
-		p.setPuntos_de_vida(p.getPuntos_de_vida() - PODER); // SI ES MORTIFAGO, LO DAÑA
-		if (p.getPuntos_de_vida() <= 0) {
-			p.morir();
-		}
+		p.recibirDaño(PODER);
 	}
 
 	@Override
-	public Object getTipo() {
+	public String getTipo() {
 		// TODO Auto-generated method stub
-		return "Ataque";
+		return this.tipo;
 	}
 
 	@Override

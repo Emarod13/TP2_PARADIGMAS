@@ -9,6 +9,9 @@ public class Batallon {
 	public Batallon(){
 		this.miembros = new ArrayList<>();
 	}
+	public Batallon(List<Personaje> miembros){
+		this.miembros = miembros;
+	}
 
 	public List<Personaje> getMiembros() {
 		return miembros;
@@ -25,9 +28,9 @@ public class Batallon {
 		}
 		return true;
 	}
-	public void atacar(Batallon b) {
+	public void atacar(Batallon enemigos, Juego juego) {
 		for(Personaje p : miembros) {
-			
+			juego.tomarDecision(p, enemigos.getMiembros());
 		}
 		
 	}
@@ -36,12 +39,5 @@ public class Batallon {
 			p.procesarEfectos();
 		}
 	}
-	public void agregarPesonaje(Personaje p) {
-		miembros.add(p);
-	}
-
-	
-	
-	
 
 }

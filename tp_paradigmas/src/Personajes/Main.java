@@ -1,33 +1,43 @@
 package Personajes;
 
+import java.util.Random;
+
 import org.jpl7.*;
 
-
 public class Main {
-    public static void main(String[] args) {
-    	Batalla batalla = new Batalla();
-        // Inicializar JPL
-    	
-        String filePath = "ruta/a/batalla.pl";  // Asegúrate de que la ruta sea correcta
-        Query cargarArchivo = new Query("consult", new Term[] {new Atom(filePath)});
-        
-        // Comprobar si se cargó el archivo
-        if (cargarArchivo.hasSolution()) {
-            System.out.println("Archivo Prolog cargado correctamente.");
-        } else {
-            System.out.println("Error al cargar el archivo Prolog.");
-            return;
-        }
+	public static void main(String[] args) {
+		Random rand = new Random();
+		Batallon magos = new Batallon();
+		Batallon mortifagos = new Batallon();
+		Juego juego = new Juego();
 
-        // Ejemplo de consulta: ¿Puede Harry Potter usar "expelliarmus"?
-        Query consulta = new Query("puede_usar_hechizo(harry_potter, expelliarmus)");
-        if (consulta.hasSolution()) {
-            System.out.println("Harry Potter puede usar Expelliarmus.");
-        } else {
-            System.out.println("Harry Potter no puede usar Expelliarmus.");
-        }
-        
-        batalla.iniciar();
-    }
+		juego.cargarPersonajesEnProlog(magos.getMiembros());
+		juego.cargarPersonajesEnProlog(mortifagos.getMiembros());
+		juego.cargarHechizosEnProlog(magos.getMiembros());
+		juego.cargarHechizosEnProlog(mortifagos.getMiembros());
+
+		do {
+			if (rand.nextBoolean()) {
+				magos.atacar(mortifagos, juego);
+				mortifagos.atacar(magos, juego);
+				magos.procesarEfectos();
+				mortifagos.procesarEfectos();
+			} else {
+				mortifagos.atacar(magos, juego);
+				magos.atacar(mortifagos, juego);
+				mortifagos.procesarEfectos();
+				magos.procesarEfectos();
+
+			}
+
+		} while (magos.tienePersonajesVivos() && mortifagos.tienePersonajesVivos());
+		
+		if(magos.tienePersonajesVivos()) {
+			System.out.println("magos ganadores!!");
+		}
+		else {
+			System.out.println("mortifagos ganadores!!");
+		}
+
+	}
 }
-

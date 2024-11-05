@@ -5,18 +5,16 @@ import Personajes.Personaje;
 public class SectumSempra extends HechizoStrategy { // COMANDANTE, SEGUIDOR
 	private static int DAÑO = 100;
 	private static int DURACION = 3;
-	
+	private static int COSTO=30;
 	public SectumSempra() {
-		super();
+		super(COSTO,"Ataque");
 	}
 
 	@Override
 	public void ejecutar(Personaje p) {
-		p.setPuntos_de_vida(p.getPuntos_de_vida() - DAÑO);
-		if (p.getPuntos_de_vida() <= 0) {
-			p.morir();
-		}
-		else {
+		p.recibirDaño(DAÑO);
+		
+		if(p.isVivo()) {
 			p.aplicarEfecto("Sangrado", DURACION);
 		}
 		
@@ -24,9 +22,9 @@ public class SectumSempra extends HechizoStrategy { // COMANDANTE, SEGUIDOR
 	}
 
 	@Override
-	public Object getTipo() {
+	public String getTipo() {
 		// TODO Auto-generated method stub
-		return "Ataque";
+		return this.tipo;
 	}
 
 	@Override

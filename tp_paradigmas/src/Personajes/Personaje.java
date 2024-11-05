@@ -152,6 +152,13 @@ public abstract class Personaje {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void recibirDaño(int daño) {
+		this.puntos_de_vida-=daño;
+		if(this.puntos_de_vida <= 0) {
+			this.morir();
+		}
+	}
 
 	protected abstract String getTipo(); // usado mas que nada para las consultas de prolog
 	
