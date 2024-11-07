@@ -12,7 +12,6 @@ public class Batallon {
 	public Batallon(List<Personaje> miembros){
 		this.miembros = miembros;
 	}
-
 	public List<Personaje> getMiembros() {
 		return miembros;
 	}

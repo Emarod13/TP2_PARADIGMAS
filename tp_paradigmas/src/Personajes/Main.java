@@ -11,8 +11,8 @@ public class Main {
 		Batallon mortifagos = new Batallon();
 		Juego juego = new Juego();
 
-		juego.cargarPersonajesEnProlog(magos.getMiembros());
-		juego.cargarPersonajesEnProlog(mortifagos.getMiembros());
+		//juego.cargarPersonajesEnProlog(magos.getMiembros());
+		//juego.cargarPersonajesEnProlog(mortifagos.getMiembros());
 		juego.cargarHechizosEnProlog(magos.getMiembros());
 		juego.cargarHechizosEnProlog(mortifagos.getMiembros());
 

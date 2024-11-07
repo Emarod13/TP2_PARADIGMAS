@@ -5,7 +5,7 @@ import java.util.Set;
 
 import Hechizos.HechizoStrategy;
 
-public class Mortifago extends Personaje {
+public abstract class Mortifago extends Personaje {
 
 	public Mortifago(String nombre, int nivel_de_magia, int puntos_de_vida, int energia, Map<String,HechizoStrategy> hechizos) {
 		super(nombre, nivel_de_magia, puntos_de_vida, energia, hechizos);

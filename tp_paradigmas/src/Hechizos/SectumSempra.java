@@ -12,11 +12,18 @@ public class SectumSempra extends HechizoStrategy { // COMANDANTE, SEGUIDOR
 
 	@Override
 	public void ejecutar(Personaje p) {
-		p.recibirDaño(DAÑO);
 		
-		if(p.isVivo()) {
-			p.aplicarEfecto("Sangrado", DURACION);
+		if(p.isProtegido()) {
+			System.out.println(p.getNombre() + " esta protegido, repele el ataque");
 		}
+		else {
+			p.recibirDaño(DAÑO);
+			
+			if(p.isVivo()) {
+				p.aplicarEfecto("Sangrado", DURACION);
+			}
+		}
+		
 		
 
 	}
