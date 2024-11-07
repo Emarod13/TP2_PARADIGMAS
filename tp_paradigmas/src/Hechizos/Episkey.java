@@ -16,12 +16,15 @@ public class Episkey extends HechizoStrategy {
 	@Override
 	public String getTipo() {
 		// TODO Auto-generated method stub
-		return "Defensa";
+		return this.tipo;
 	}
 	@Override
 	public String getNombre() {
 		// TODO Auto-generated method stub
-		return this.tipo;
+		return "Episkey";
+	}
+	public int getCuracion() {
+		return this.CURACION;
 	}
 	
 	

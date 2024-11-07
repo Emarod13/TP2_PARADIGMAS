@@ -25,32 +25,49 @@ public class Juego {
 
 	public void cargarOActualizarPersonajeEnProlog(Personaje personaje) {
 		String nombre = personaje.getNombre();
-		int vida = personaje.getPuntos_de_vida();
-		int energia = personaje.getEnergia();
 
-		// Eliminar cualquier hecho `personaje` existente para este personaje en Prolog
-		String retractPersonaje = String.format("retract(personaje('%s', _, _, _)).", nombre);
-		Query retractQuery = new Query(retractPersonaje);
-		retractQuery.hasSolution();
+	    // Verificar si el personaje está vivo; si no, eliminar sus hechos en Prolog y salir
+	    if (!personaje.isVivo()) {
+	        // Eliminar cualquier hecho `personaje` y `esta_debilitado` existente para este personaje
+	        String retractPersonaje = String.format("retractall(personaje('%s', _, _, _)).", nombre);
+	        Query retractPersonajeQuery = new Query(retractPersonaje);
+	        retractPersonajeQuery.hasSolution();
 
-		// Insertar el hecho `personaje` (esto carga o actualiza el personaje)
-		String nuevoHechoPersonaje = String.format("assert(personaje('%s', '%s', %d, %d)).", nombre,
-				personaje.getTipo(), vida, energia);
-		Query assertQuery = new Query(nuevoHechoPersonaje);
-		assertQuery.hasSolution();
+	        String retractDebilitado = String.format("retractall(esta_debilitado('%s')).", nombre);
+	        Query retractDebilitadoQuery = new Query(retractDebilitado);
+	        retractDebilitadoQuery.hasSolution();
 
-		// Actualizar el estado de `esta_debilitado`
-		String retractDebilitado = String.format("retract(esta_debilitado('%s')).", nombre);
-		Query retractDebilitadoQuery = new Query(retractDebilitado);
-		retractDebilitadoQuery.hasSolution(); // Elimina `esta_debilitado` si ya existe
+	        System.out.println("Personaje " + nombre + " ha sido eliminado en Prolog (está muerto).");
+	        return;
+	    }
 
-		if (personaje.estaDebilitado()) {
-			String nuevoHechoDebilitado = String.format("assert(esta_debilitado('%s')).", nombre);
-			Query assertDebilitadoQuery = new Query(nuevoHechoDebilitado);
-			assertDebilitadoQuery.hasSolution();
-		}
+	    // Si el personaje está vivo, actualizar o cargar el personaje en Prolog
+	    int vida = personaje.getPuntos_de_vida();
+	    int energia = personaje.getEnergia();
 
-		System.out.println("Personaje " + nombre + " cargado o actualizado en Prolog.");
+	    // Eliminar cualquier hecho `personaje` existente para este personaje en Prolog
+	    String retractPersonaje = String.format("retract(personaje('%s', _, _, _)).", nombre);
+	    Query retractQuery = new Query(retractPersonaje);
+	    retractQuery.hasSolution();
+
+	    // Insertar el hecho `personaje` (esto carga o actualiza el personaje)
+	    String nuevoHechoPersonaje = String.format("assert(personaje('%s', '%s', %d, %d)).", nombre,
+	            personaje.getTipo(), vida, energia);
+	    Query assertQuery = new Query(nuevoHechoPersonaje);
+	    assertQuery.hasSolution();
+
+	    // Actualizar el estado de `esta_debilitado`
+	    String retractDebilitado = String.format("retract(esta_debilitado('%s')).", nombre);
+	    Query retractDebilitadoQuery = new Query(retractDebilitado);
+	    retractDebilitadoQuery.hasSolution(); // Elimina `esta_debilitado` si ya existe
+
+	    if (personaje.estaDebilitado()) {
+	        String nuevoHechoDebilitado = String.format("assert(esta_debilitado('%s')).", nombre);
+	        Query assertDebilitadoQuery = new Query(nuevoHechoDebilitado);
+	        assertDebilitadoQuery.hasSolution();
+	    }
+
+	    System.out.println("Personaje " + nombre + " cargado o actualizado en Prolog.");
 	}
 
 	public void cargarOActualizarPersonajeEnProlog(List<Personaje> personaje) {
@@ -58,15 +75,27 @@ public class Juego {
 			cargarOActualizarPersonajeEnProlog(p);
 		}
 	}
-
+	public void actuar(Personaje personaje, List<Personaje> enemigos) {
+		
+		String decision = tomarDecision(personaje,enemigos);
+		System.out.println(personaje.getNombre() + " decide " + decision);
+		ejecutarAccion(decision, personaje, enemigos);
+		
+	}
 	/**
 	 * Toma una decisión de acción (atacar, defender o consumir) para un personaje
 	 */
-	public void tomarDecision(Personaje personaje, List<Personaje> enemigos) {
+	public String tomarDecision(Personaje personaje, List<Personaje> enemigos) {
 		// Actualizar el estado debilitado de este personaje y de sus enemigos en Prolog
-		cargarOActualizarPersonajeEnProlog(personaje);
-		enemigos.forEach(this::cargarOActualizarPersonajeEnProlog);
-
+		//cargarOActualizarPersonajeEnProlog(personaje);
+		//enemigos.forEach(this::cargarOActualizarPersonajeEnProlog);
+		try {
+	        Thread.sleep(200); // 100 ms de pausa
+	    } catch (InterruptedException e) {
+	        Thread.currentThread().interrupt(); // Restablece el estado de interrupción si se produce una excepción
+	        System.out.println("Interrupción en la pausa del hilo");
+	    }
+		
 		// Configurar la consulta para decidir la acción
 		Query consulta = new Query(String.format("decidir_accion(%d, %d, Accion)", personaje.getPuntos_de_vida(),
 				(int) enemigos.stream().filter(Personaje::estaDebilitado).count() // Contar enemigos debilitados
@@ -82,32 +111,33 @@ public class Juego {
 
 		// Imprimir la acción decidida para depuración
 		System.out.println("Acción decidida: " + accion);
+		
+		return accion;
 
-		// Ejecutar la acción decidida
-		ejecutarAccion(accion, personaje, enemigos);
-
-		// Volver a actualizar el personaje después de la acción
-		cargarOActualizarPersonajeEnProlog(personaje);
 	}
 
 	/**
 	 * Ejecuta la acción decidida en Prolog para el personaje
 	 */
-	private void ejecutarAccion(String accion, Personaje personaje, List<Personaje> enemigos) {
+	public void ejecutarAccion(String accion, Personaje personaje, List<Personaje> enemigos) {
 		switch (accion) {
 		case "Atacar":
 			Personaje objetivo = obtenerObjetivo(personaje, enemigos);
+		
 			if (objetivo != null) {
 				// Elegir hechizo de ataque
 				String hechizoAtaque = elegirHechizo(personaje, "Ataque");
+				
 				if (hechizoAtaque != null) {
 					// Reemplazar las comillas simples por dobles si es necesario
+					
 					hechizoAtaque = hechizoAtaque.replace("'", "");
 
 					personaje.atacar(objetivo, hechizoAtaque);
 					cargarOActualizarPersonajeEnProlog(objetivo);
-					System.out.println(
-							personaje.getNombre() + " ataca a " + objetivo.getNombre() + " con " + hechizoAtaque);
+					cargarOActualizarPersonajeEnProlog(personaje);
+				
+		
 				} else {
 					System.out.println(personaje.getNombre() + " no tiene hechizos de ataque disponibles.");
 				}
@@ -118,10 +148,11 @@ public class Juego {
 			String hechizoDefensa = elegirHechizo(personaje, "Defensa");
 			if (hechizoDefensa != null) {
 				// Reemplazar las comillas simples por dobles si es necesario
-				hechizoDefensa = hechizoDefensa.replace("'", "\"");
+				hechizoDefensa = hechizoDefensa.replace("'", "");
 
 				personaje.defender(hechizoDefensa);
-				System.out.println(personaje.getNombre() + " se defiende con " + hechizoDefensa);
+				cargarOActualizarPersonajeEnProlog(personaje);
+			
 			} else {
 				System.out.println(personaje.getNombre() + " no tiene hechizos de defensa disponibles.");
 			}
@@ -143,6 +174,7 @@ public class Juego {
 
 		// Imprimir los valores de depuración
 		System.out.println("Energía actual de " + nombrePersonaje + ": " + energiaActual);
+		System.out.println("Vida actual de " + nombrePersonaje + ": " + personaje.getPuntos_de_vida());
 		System.out.println("Tipo de hechizo solicitado: " + tipo);
 
 		// Crear la consulta para Prolog
@@ -186,12 +218,16 @@ public class Juego {
 	 */
 	private Personaje obtenerObjetivo(Personaje personaje, List<Personaje> enemigos) {
 		Query consultaObjetivos = new Query(
-				String.format("objetivos_recomendados(Objetivo, '%s')", personaje.getTipo()));
+				String.format("objetivos_recomendados(Objetivo, '%s')", enemigos.getFirst().getTipo()));
 
 		if (consultaObjetivos.hasSolution()) {
-			String nombreObjetivo = consultaObjetivos.oneSolution().get("Objetivo").toString();
-			return enemigos.stream().filter(enemigo -> enemigo.getNombre().equals(nombreObjetivo)).findFirst()
-					.orElse(null);
+			String nombreObjetivo = consultaObjetivos.oneSolution().get("Objetivo").toString().replace("'", "");
+			System.out.println(nombreObjetivo);
+			for (Personaje enemigo : enemigos) {
+	            if (enemigo.getNombre().equals(nombreObjetivo)) {
+	                return enemigo;
+	            }
+	        }
 		}
 
 		// Si no hay objetivo recomendado, se elige uno aleatorio

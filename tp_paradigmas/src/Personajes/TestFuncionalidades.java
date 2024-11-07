@@ -97,13 +97,77 @@ public class TestFuncionalidades {
 		Batallon objetivo = new Batallon(new ArrayList<>(PersonajeFactory.generarMortifagos()));
 		juego.cargarOActualizarPersonajeEnProlog(test.getMiembros());
 		juego.cargarOActualizarPersonajeEnProlog(objetivo.getMiembros());
-		test.getMiembros().forEach(personaje->juego.cargarHechizosEnProlog(personaje));
-		objetivo.getMiembros().forEach(personaje->juego.cargarHechizosEnProlog(personaje));
+		test.getMiembros().forEach(personaje -> juego.cargarHechizosEnProlog(personaje));
+		objetivo.getMiembros().forEach(personaje -> juego.cargarHechizosEnProlog(personaje));
+
+		// objetivo.atacar(test, juego);
+
+		Personaje prueba = objetivo.getMiembros().getFirst();
+		juego.actuar(prueba, test.getMiembros()); // deberia atacar, ya que tiene toda la vida.
 		
-		objetivo.atacar(test, juego);
+		prueba.setPuntos_de_vida(10);
+		juego.actuar(prueba, test.getMiembros());
+		// prueba.setPuntos_de_vida(10); // deberia defenderse.
+
+		// prueba.setPuntos_de_vida(10); // deberia defenderse.
+	/*	Personaje objetivoDebil1 = test.getMiembros().get(3);
+		objetivoDebil1.setPuntos_de_vida(20);
+		juego.cargarOActualizarPersonajeEnProlog(objetivoDebil1);
+		System.out.println(objetivoDebil1.getNombre());
+*/
+	/*	Personaje objetivoDebil2 = test.getMiembros().get(4);
+		objetivoDebil2.setPuntos_de_vida(20);
+		juego.cargarOActualizarPersonajeEnProlog(objetivoDebil2);
+		System.out.println(objetivoDebil2.getNombre());
+*/
+		
+		
+	}
+	@Test
+	public void ejecutarAccionUnitaria() {
+		Batallon test = new Batallon(new ArrayList<>(PersonajeFactory.generarMagos()));
+		Personaje prueba = PersonajeFactory.generarMortifagos().get(0);
+		Juego juego = new Juego();
+		System.out.println(prueba.nombre);
+		System.out.println("Energia: "+prueba.getEnergia());
+		System.out.println("Vida: "+prueba.getPuntos_de_vida());
+		juego.cargarOActualizarPersonajeEnProlog(prueba);
+		juego.cargarHechizosEnProlog(prueba);
+		juego.cargarOActualizarPersonajeEnProlog(test.getMiembros());
+		
+		juego.ejecutarAccion("Atacar", prueba, test.getMiembros()); // deberia atacar
+		juego.ejecutarAccion("Defender", prueba, test.getMiembros()); // deberia defenderse
+		juego.ejecutarAccion("defenderseee", prueba, test.getMiembros()); // no deberia hacer nada, accion incorrecta
+		
+		
+		
+	}
+	@Test
+	public void tomarDecisionUnitaria() {
+		Batallon test = new Batallon(new ArrayList<>(PersonajeFactory.generarMagos()));
+		Personaje prueba = PersonajeFactory.generarMortifagos().get(0);
+		Juego juego = new Juego();
+		System.out.println(prueba.nombre);
+		System.out.println("Energia: "+prueba.getEnergia());
+		System.out.println("Vida: "+prueba.getPuntos_de_vida());
+		juego.cargarOActualizarPersonajeEnProlog(prueba);
+		juego.cargarHechizosEnProlog(prueba);
+		juego.cargarOActualizarPersonajeEnProlog(test.getMiembros());
+		
+		String decision;
+		
+		decision = juego.tomarDecision(prueba, test.getMiembros()); // al estar con vida al maximo, deberia decidir atacar
+		
+		assertEquals(decision,"Atacar");
+		
+		prueba.setPuntos_de_vida(10);
+		System.out.println("Vida: "+prueba.getPuntos_de_vida());
+		decision = juego.tomarDecision(prueba, test.getMiembros());
+		assertEquals(decision,"Defender"); // al estar con poca vida, decide defenderse
 		
 		
 		
 		
 	}
+
 }

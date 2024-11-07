@@ -4,8 +4,7 @@
 %
 %esta_debilitado(Nombre).
 
-muertos(Personaje):-personaje(Personaje,_,Vida,_),Vida =<0.
-objetivos_recomendados(Nombre,Tipo):-personaje(Nombre,Tipo,_,_),esta_debilitado(Nombre),\+muertos(Nombre).
+objetivos_recomendados(Nombre,Tipo):-personaje(Nombre,Tipo,Vida,_),esta_debilitado(Nombre),Vida>0.
 
 % Reglas de decisión básicas en Prolog
 % Regla para decidir atacar: ataca si hay enemigos debilitados
