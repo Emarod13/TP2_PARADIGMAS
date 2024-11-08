@@ -7,12 +7,12 @@ import org.jpl7.*;
 public class Main {
 	public static void main(String[] args) {
 		Random rand = new Random();
-		Batallon magos = new Batallon();
-		Batallon mortifagos = new Batallon();
+		Batallon magos = new Batallon(PersonajeFactory.generarMagos());
+		Batallon mortifagos = new Batallon(PersonajeFactory.generarMortifagos());
 		Juego juego = new Juego();
 
-		//juego.cargarPersonajesEnProlog(magos.getMiembros());
-		//juego.cargarPersonajesEnProlog(mortifagos.getMiembros());
+		juego.cargarOActualizarPersonajeEnProlog(magos.getMiembros());
+		juego.cargarOActualizarPersonajeEnProlog(mortifagos.getMiembros());
 		juego.cargarHechizosEnProlog(magos.getMiembros());
 		juego.cargarHechizosEnProlog(mortifagos.getMiembros());
 
@@ -22,11 +22,15 @@ public class Main {
 				mortifagos.atacar(magos, juego);
 				magos.procesarEfectos();
 				mortifagos.procesarEfectos();
+				magos.recuperarEnergia();
+				mortifagos.recuperarEnergia();
 			} else {
 				mortifagos.atacar(magos, juego);
 				magos.atacar(mortifagos, juego);
 				mortifagos.procesarEfectos();
 				magos.procesarEfectos();
+				mortifagos.recuperarEnergia();
+				magos.recuperarEnergia();
 
 			}
 

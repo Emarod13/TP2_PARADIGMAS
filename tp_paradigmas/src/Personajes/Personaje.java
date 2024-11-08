@@ -180,7 +180,9 @@ public abstract class Personaje {
 				this.morir();
 			}
 		}
-	
+	public void recuperarEnergia(int energia) {
+		this.energia += energia;
+	}
 		
 	
 	protected abstract String getTipo(); // usado mas que nada para las consultas de prolog

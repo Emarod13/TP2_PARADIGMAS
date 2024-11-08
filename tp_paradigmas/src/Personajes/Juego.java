@@ -168,7 +168,7 @@ public class Juego {
 		}
 	}
 
-	private String elegirHechizo(Personaje personaje, String tipo) {
+	public String elegirHechizo(Personaje personaje, String tipo) {
 		int energiaActual = personaje.getEnergia();
 		String nombrePersonaje = personaje.getNombre();
 
@@ -216,7 +216,7 @@ public class Juego {
 	/**
 	 * Obtiene el objetivo recomendado de ataque para el personaje en base a Prolog
 	 */
-	private Personaje obtenerObjetivo(Personaje personaje, List<Personaje> enemigos) {
+	public Personaje obtenerObjetivo(Personaje personaje, List<Personaje> enemigos) {
 		Query consultaObjetivos = new Query(
 				String.format("objetivos_recomendados(Objetivo, '%s')", enemigos.getFirst().getTipo()));
 
