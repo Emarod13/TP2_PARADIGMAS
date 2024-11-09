@@ -2,7 +2,6 @@ package Personajes;
 
 import java.util.Random;
 
-import org.jpl7.*;
 
 public class Main {
 	public static void main(String[] args) {

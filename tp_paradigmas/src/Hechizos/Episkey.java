@@ -24,7 +24,7 @@ public class Episkey extends HechizoStrategy {
 		return "Episkey";
 	}
 	public int getCuracion() {
-		return this.CURACION;
+		return Episkey.CURACION;
 	}
 	
 	

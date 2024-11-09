@@ -1,17 +1,12 @@
 package Personajes;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-import Hechizos.HechizoFactory;
 import Hechizos.HechizoStrategy;
 
 public abstract class Personaje {
 	protected String nombre;
-	protected int nivel_de_magia;
 	protected int puntos_de_vida;
 	protected Map<String, HechizoStrategy> lista_de_hechizos;
 	protected Map<String, Integer> efectos_aplicados;
@@ -20,10 +15,9 @@ public abstract class Personaje {
 	protected int energia;
 	protected final int energia_inicial;
 
-	public Personaje(String nombre, int nivel_de_magia, int puntos_de_vida, int energia,
+	public Personaje(String nombre,  int puntos_de_vida, int energia,
 			Map<String, HechizoStrategy> hechizos) {
 		this.nombre = nombre;
-		this.nivel_de_magia = nivel_de_magia;
 		this.puntos_de_vida = puntos_de_vida;
 		this.lista_de_hechizos = hechizos;
 		this.vida_inicial = puntos_de_vida;
@@ -39,14 +33,6 @@ public abstract class Personaje {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public int getNivel_de_magia() {
-		return nivel_de_magia;
-	}
-
-	public void setNivel_de_magia(int nivel_de_magia) {
-		this.nivel_de_magia = nivel_de_magia;
 	}
 
 	public int getPuntos_de_vida() {
@@ -103,19 +89,24 @@ public abstract class Personaje {
 
 	public void procesarEfectos() {
 		// Itera sobre los efectos y los aplica en cada round
-		final int DAÑO_SANGRADO = 10;
+		final int DAÑO_SANGRADO = 40;
+		final int AGOTAMIENTO = 40;
 		efectos_aplicados.forEach((efecto, duracion) -> {
 			if (duracion > 0) {
 				switch (efecto) {
 				case "Sangrado":
 					this.recibirDaño(DAÑO_SANGRADO); // Daño por sangrado
-					System.out.println(nombre + " sufre 10 de daño por sangrado"); // el estar protegido, no lo protege del sangrado
+					System.out.println(nombre + " sufre " + DAÑO_SANGRADO+ " de daño por sangrado"); // el estar protegido, no lo protege del sangrado
 					break;
 				case "Desarmado":
 					//System.out.println(nombre + "esta desarmado, no puede pelear");
 					break;
 				case "Protegido":
 					//System.out.println(nombre + " esta protegido, no puede ser atacado");
+					break;
+				case "Agotado":
+					this.setEnergia(this.energia-AGOTAMIENTO);
+					System.out.println(nombre + " sufre de agotamiento, pierde 40 puntos de energia");
 					break;
 				}
 				efectos_aplicados.put(efecto, duracion - 1); // Reducir duración del efecto

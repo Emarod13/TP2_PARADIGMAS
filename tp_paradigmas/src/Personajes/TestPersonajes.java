@@ -7,13 +7,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.jpl7.Query;
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
 import Hechizos.Episkey;
 import Hechizos.ExpectoPatronum;
-import Hechizos.HechizoStrategy;
+
 import Hechizos.SectumSempra;
 
 public class TestPersonajes {

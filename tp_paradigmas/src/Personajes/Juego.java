@@ -5,9 +5,7 @@ import org.jpl7.Term;
 
 import Hechizos.HechizoStrategy;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -77,10 +75,11 @@ public class Juego {
 	}
 	public void actuar(Personaje personaje, List<Personaje> enemigos) {
 		
-		if(enemigos.isEmpty()) {
+		/*if(enemigos.isEmpty()) {
 			System.out.println("No quedan enemigos!!!!");
 			return;
 		}
+		*/
 		String decision = tomarDecision(personaje,enemigos);
 		System.out.println(personaje.getNombre() + " decide " + decision);
 		ejecutarAccion(decision, personaje, enemigos);

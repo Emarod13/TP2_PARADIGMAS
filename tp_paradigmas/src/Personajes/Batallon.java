@@ -37,9 +37,10 @@ public class Batallon {
 
 	public void atacar(Batallon enemigos, Juego juego) {
 		for (Personaje p : miembros) {
-			//if(!p.isVivo()) {
-				//continue;
-			//}
+			if(enemigos.getMiembros().isEmpty()) {
+				System.out.println("No quedan enemigos!!!!");
+				return;
+			}
 			juego.actuar(p, enemigos.getMiembros());
 		}
 

@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import Hechizos.AvadaKedavra;
 import Hechizos.Episkey;
-import Hechizos.ExpectoPatronum;
+
 import Hechizos.HechizoStrategy;
 
 public class TestJuegoProlog {
