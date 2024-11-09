@@ -2,14 +2,14 @@ package Hechizos;
 
 import Personajes.Personaje;
 
-public class AvadaKedavra extends HechizoStrategy { // COMANDANTE
+public class LuxExterminus extends HechizoStrategy {
+	
 	private static double PORCENTAJE = 0.3;
 	private static int COSTO = 50;
-
-	public AvadaKedavra() {
+	public LuxExterminus() {
 		super(COSTO, "Ataque");
+		// TODO Auto-generated constructor stub
 	}
-
 	@Override
 	public void ejecutar(Personaje p) {
 		if (p.isProtegido())
@@ -22,17 +22,15 @@ public class AvadaKedavra extends HechizoStrategy { // COMANDANTE
 			}
 		}
 	}
-
 	@Override
 	public String getTipo() {
 		// TODO Auto-generated method stub
 		return this.tipo;
 	}
-
 	@Override
 	public String getNombre() {
 		// TODO Auto-generated method stub
-		return "AvadaKedavra";
+		return "LuxExterminus";
 	}
 
 }

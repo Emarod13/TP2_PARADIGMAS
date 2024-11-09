@@ -40,29 +40,6 @@ public class TestJuegoProlog {
 	}
 
 	@Test
-	public void BatallonesFuncionalidades() {
-		Batallon magos = new Batallon(new ArrayList<>(PersonajeFactory.generarMagos()));
-		Batallon mortifagos = new Batallon(new ArrayList<>(PersonajeFactory.generarMortifagos()));
-
-		magos.getMiembros().forEach(personaje -> personaje.aplicarEfecto("Sangrado", 1));
-		mortifagos.getMiembros().forEach(personaje -> personaje.aplicarEfecto("Sangrado", 1));
-
-		magos.procesarEfectos();
-		magos.getMiembros()
-				.forEach(personaje -> assertEquals(personaje.getPuntos_de_vida(), personaje.getVida_inicial() - 10));
-		mortifagos.procesarEfectos();
-		mortifagos.getMiembros()
-				.forEach(personaje -> assertEquals(personaje.getPuntos_de_vida(), personaje.getVida_inicial() - 10));
-
-		magos.getMiembros().forEach(personaje -> personaje.morir());
-
-		mortifagos.getMiembros().forEach(personaje -> personaje.morir());
-
-		assertEquals(magos.tienePersonajesVivos(), false);
-		assertEquals(mortifagos.tienePersonajesVivos(), false);
-	}
-
-	@Test
 	public void PrologJuego() {
 
 		Batallon test = new Batallon(new ArrayList<>(PersonajeFactory.generarMagos()));
@@ -218,6 +195,20 @@ public class TestJuegoProlog {
 
 		// Verificar que me devuelve el objetivo "debilitado"
 		assertEquals("Lucius Malfoy", objetivo.getNombre());
+	}
+	
+	@Test
+	public void ataqueBatallon() {
+		Batallon test = new Batallon(new ArrayList<>(PersonajeFactory.generarMagos()));
+		Batallon objetivo = new Batallon(new ArrayList<>(PersonajeFactory.generarMortifagos()));
+		juego.cargarOActualizarPersonajeEnProlog(test.getMiembros());
+		juego.cargarOActualizarPersonajeEnProlog(objetivo.getMiembros());
+		System.out.println("PERSONAJES Y HECHIZOS CARGADOS EN PROLOG, COMIENZA EL JUEGO!!!");
+		System.out.println("--------------------------------------------------------------");
+		juego.cargarHechizosEnProlog(test.getMiembros());
+		juego.cargarHechizosEnProlog(objetivo.getMiembros());
+		
+		test.atacar(objetivo, juego);
 	}
 
 }

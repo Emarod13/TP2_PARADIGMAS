@@ -84,7 +84,8 @@ public abstract class Personaje {
 	public void morir() {
 		this.vivo = false;
 		this.puntos_de_vida = 0;
-	}
+		System.out.println(this.nombre+ " ha muerto!!");	
+		}
 
 	public void setEnergia(int energia) {
 		this.energia = energia;

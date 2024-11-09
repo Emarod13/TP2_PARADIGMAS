@@ -39,5 +39,8 @@ public class SectumSempra extends HechizoStrategy { // COMANDANTE, SEGUIDOR
 		// TODO Auto-generated method stub
 		return "SectumSempra";
 	}
+	public int getDaño() {
+		return SectumSempra.DAÑO;
+	}
 
 }

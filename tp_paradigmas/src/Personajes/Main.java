@@ -15,6 +15,10 @@ public class Main {
 		juego.cargarOActualizarPersonajeEnProlog(mortifagos.getMiembros());
 		juego.cargarHechizosEnProlog(magos.getMiembros());
 		juego.cargarHechizosEnProlog(mortifagos.getMiembros());
+		System.out.println("TODO CARGADO EN PROLOG, COMIENZA EL JUEGO!!!!");
+		System.out.println("-------------------------------------------");
+		System.out.println("-------------------------------------------");
+		
 
 		do {
 			if (rand.nextBoolean()) {
@@ -24,6 +28,11 @@ public class Main {
 				mortifagos.procesarEfectos();
 				magos.recuperarEnergia();
 				mortifagos.recuperarEnergia();
+				juego.cargarOActualizarPersonajeEnProlog(magos.getMiembros());
+				juego.cargarOActualizarPersonajeEnProlog(mortifagos.getMiembros());
+				System.out.println("TODO CARGADO EN PROLOG, SIGUIENTE RONDA!!!!");
+				System.out.println("-------------------------------------------");
+				System.out.println("-------------------------------------------");
 			} else {
 				mortifagos.atacar(magos, juego);
 				magos.atacar(mortifagos, juego);
@@ -31,6 +40,11 @@ public class Main {
 				magos.procesarEfectos();
 				mortifagos.recuperarEnergia();
 				magos.recuperarEnergia();
+				juego.cargarOActualizarPersonajeEnProlog(magos.getMiembros());
+				juego.cargarOActualizarPersonajeEnProlog(mortifagos.getMiembros());
+				System.out.println("TODO CARGADO EN PROLOG, SIGUIENTE RONDA!!!!");
+				System.out.println("-------------------------------------------");
+				System.out.println("-------------------------------------------");
 
 			}
 

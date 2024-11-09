@@ -23,7 +23,10 @@ public class Batallon {
 	}
 
 	public boolean tienePersonajesVivos() {
-
+		
+		if(miembros.isEmpty()) {
+			return false;
+		}
 		for (Personaje p : miembros) {
 			if (!p.isVivo()) {
 				return false;
@@ -34,6 +37,9 @@ public class Batallon {
 
 	public void atacar(Batallon enemigos, Juego juego) {
 		for (Personaje p : miembros) {
+			//if(!p.isVivo()) {
+				//continue;
+			//}
 			juego.actuar(p, enemigos.getMiembros());
 		}
 

@@ -9,8 +9,10 @@ import java.util.Set;
 
 import Hechizos.AvadaKedavra;
 import Hechizos.Episkey;
+import Hechizos.ExpectoPatronum;
 import Hechizos.Expelliarmus;
 import Hechizos.HechizoStrategy;
+import Hechizos.LuxExterminus;
 import Hechizos.Protego;
 import Hechizos.SectumSempra;
 
@@ -142,11 +144,15 @@ public class PersonajeFactory {
         // Crear hechizos básicos
         HechizoStrategy expelliarmus = new Expelliarmus();
         HechizoStrategy protego = new Protego();
+        HechizoStrategy patronum = new ExpectoPatronum();
+        HechizoStrategy lux = new LuxExterminus();
 
         // Crear lista de hechizos compartida
         Map<String, HechizoStrategy> hechizosMago = new HashMap<>();
         hechizosMago.put("Expelliarmus", expelliarmus);
         hechizosMago.put("Protego", protego);
+        hechizosMago.put("ExpectoPatronum", patronum);
+        hechizosMago.put("LuxExterminus", lux);
 
         // Agregar distintos tipos de magos a la lista
         magos.add(new Auror("Harry Potter", new HashMap<>(hechizosMago)));

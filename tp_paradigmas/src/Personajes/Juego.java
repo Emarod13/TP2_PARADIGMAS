@@ -67,7 +67,7 @@ public class Juego {
 	        assertDebilitadoQuery.hasSolution();
 	    }
 
-	    System.out.println("Personaje " + nombre + " cargado o actualizado en Prolog.");
+	   // System.out.println("Personaje " + nombre + " cargado o actualizado en Prolog.");
 	}
 
 	public void cargarOActualizarPersonajeEnProlog(List<Personaje> personaje) {
@@ -77,6 +77,10 @@ public class Juego {
 	}
 	public void actuar(Personaje personaje, List<Personaje> enemigos) {
 		
+		if(enemigos.isEmpty()) {
+			System.out.println("No quedan enemigos!!!!");
+			return;
+		}
 		String decision = tomarDecision(personaje,enemigos);
 		System.out.println(personaje.getNombre() + " decide " + decision);
 		ejecutarAccion(decision, personaje, enemigos);
@@ -110,7 +114,7 @@ public class Juego {
 		}
 
 		// Imprimir la acción decidida para depuración
-		System.out.println("Acción decidida: " + accion);
+	//	System.out.println("Acción decidida: " + accion);
 		
 		return accion;
 
@@ -135,6 +139,9 @@ public class Juego {
 
 					personaje.atacar(objetivo, hechizoAtaque);
 					cargarOActualizarPersonajeEnProlog(objetivo);
+					if(!objetivo.isVivo()) {
+						enemigos.removeIf(per->per.getNombre().equals(objetivo.getNombre())); // lo saco de la lista
+					}
 					cargarOActualizarPersonajeEnProlog(personaje);
 				
 		
@@ -173,16 +180,16 @@ public class Juego {
 		String nombrePersonaje = personaje.getNombre();
 
 		// Imprimir los valores de depuración
-		System.out.println("Energía actual de " + nombrePersonaje + ": " + energiaActual);
-		System.out.println("Vida actual de " + nombrePersonaje + ": " + personaje.getPuntos_de_vida());
-		System.out.println("Tipo de hechizo solicitado: " + tipo);
+	//	System.out.println("Energía actual de " + nombrePersonaje + ": " + energiaActual);
+	//	System.out.println("Vida actual de " + nombrePersonaje + ": " + personaje.getPuntos_de_vida());
+	//	System.out.println("Tipo de hechizo solicitado: " + tipo);
 
 		// Crear la consulta para Prolog
 		String consulta = "hechizos_disponibles('" + nombrePersonaje + "', " + energiaActual + ", '" + tipo
 				+ "', HechizosDisponibles).";
 
 		// Imprimir la consulta Prolog generada para depuración
-		System.out.println("Consulta Prolog: " + consulta);
+	//	System.out.println("Consulta Prolog: " + consulta);
 
 		// Ejecutar la consulta
 		Query q = new Query(consulta);
@@ -262,7 +269,7 @@ public class Juego {
 					+ " con costo " + costo + " y tipo " + tipo);
 		}
 
-		System.out.println("Hechizos del personaje " + nombrePersonaje + " cargados en Prolog.");
+	//	System.out.println("Hechizos del personaje " + nombrePersonaje + " cargados en Prolog.");
 	}
 
 	public void cargarHechizosEnProlog(List<Personaje> personajes) {
