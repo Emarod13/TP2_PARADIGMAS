@@ -39,4 +39,9 @@ public class SomnumEternum extends HechizoStrategy {
 		return "SomnumEternum";
 	}
 
+	public int getDaño() {
+		// TODO Auto-generated method stub
+		return DAÑO;
+	}
+
 }

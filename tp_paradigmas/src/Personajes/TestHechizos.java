@@ -59,6 +59,37 @@ class TestHechizos {
 		assertEquals(usuario.vida_inicial + test.getCuracion(), usuario.getPuntos_de_vida());
 
 	}
+	@Test
+	public void TenebrisScutum() {
+		TenebrisScutum test = new TenebrisScutum();
+		ExpectoPatronum hechizoAtaque = new ExpectoPatronum();
+		usuario.getLista_de_hechizos().put(test.getNombre(), test);
+		objetivo.getLista_de_hechizos().put(hechizoAtaque.getNombre(), hechizoAtaque);
+		usuario.defender(test.getNombre());
+		
+		assertEquals(usuario.energia_inicial-test.getCostoEnergia(),usuario.getEnergia());
+		assertTrue(usuario.efectos_aplicados.containsKey("Protegido"));
+		
+		objetivo.atacar(usuario,hechizoAtaque.getNombre());
+		
+		assertEquals(usuario.getVida_inicial(),usuario.getPuntos_de_vida());
+	}
+	@Test
+	public void LaceroMortis() {
+		LaceroMortis test = new LaceroMortis();
+		ExpectoPatronum hechizoAtaque = new ExpectoPatronum()
+				;
+		usuario.getLista_de_hechizos().put(test.getNombre(), test);
+		objetivo.getLista_de_hechizos().put(hechizoAtaque.getNombre(), hechizoAtaque);
+		usuario.atacar(objetivo,test.getNombre());
+		
+		assertEquals(usuario.energia_inicial-test.getCostoEnergia(),usuario.getEnergia());
+		assertTrue(objetivo.efectos_aplicados.containsKey("Desarmado"));
+		
+		objetivo.atacar(usuario,hechizoAtaque.getNombre());
+		
+		assertEquals(usuario.getVida_inicial(),usuario.getPuntos_de_vida());
+	}
 
 	/// HECHIZOS DE MAGO
 	// ----------------------------------------
@@ -108,6 +139,38 @@ class TestHechizos {
 		assertEquals(objetivo.getPuntos_de_vida(),objetivo.getVida_inicial());
 		
 		
+		
+	}
+	@Test
+	public void LuxExterminus() {
+		LuxExterminus test = new LuxExterminus();
+		objetivo.getLista_de_hechizos().put("LuxExterminus", test);
+		
+		int energia_inicial = objetivo.getEnergia();
+		int costo = test.getCostoEnergia();
+
+		objetivo.atacar(usuario, test.getNombre());
+
+		assertEquals(true, usuario.isVivo()); // no deberia poder matarlo
+		assertEquals(energia_inicial - costo, objetivo.getEnergia()); // energia reducida
+
+		usuario.recibirDaño(200); // lo bajamos para que pueda morir
+		objetivo.atacar(usuario, test.getNombre());
+
+		assertFalse(usuario.isVivo()); // deberia poder matarlo
+	}
+	@Test
+	public void SomnumEternum() {
+		SomnumEternum test = new SomnumEternum();
+		objetivo.getLista_de_hechizos().put("SomnumEternum", test);
+		int costo = test.getCostoEnergia();
+		
+		objetivo.atacar(usuario, test.getNombre());
+		assertEquals(objetivo.energia_inicial-costo,objetivo.getEnergia());
+		
+		assertEquals(usuario.getVida_inicial()-test.getDaño(),usuario.getPuntos_de_vida());
+		
+		assertTrue(usuario.efectos_aplicados.containsKey("Agotado"));
 		
 	}
 
