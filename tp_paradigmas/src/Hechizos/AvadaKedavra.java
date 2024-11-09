@@ -4,7 +4,7 @@ import Personajes.Personaje;
 
 public class AvadaKedavra extends HechizoStrategy { // COMANDANTE
 	private static double PORCENTAJE = 0.3;
-	private static int COSTO = 50;
+	private static int COSTO = 180;
 
 	public AvadaKedavra() {
 		super(COSTO, "Ataque");

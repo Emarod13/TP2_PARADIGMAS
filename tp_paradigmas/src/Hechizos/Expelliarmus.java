@@ -3,8 +3,8 @@ package Hechizos;
 import Personajes.Personaje;
 
 public class Expelliarmus extends HechizoStrategy { // ESTUDIANTE
-	private static int DURACION = 3;
-	private static int COSTO = 30;
+	private static int DURACION = 2;
+	private static int COSTO = 75;
 
 	public Expelliarmus() {
 		super(COSTO, "Ataque");

@@ -66,7 +66,7 @@ public class PersonajeFactory {
 		hechizos.put("LuxExterminus", new LuxExterminus());
 		hechizos.put("Expelliarmus", new Expelliarmus());
 		hechizos.put("SomnumEternum", new SomnumEternum());
-
+		hechizos.put("Protego", new Protego());
 		return hechizos;
 
 	}
@@ -130,7 +130,7 @@ public class PersonajeFactory {
 		magos.add(new Auror("Harry Potter", PersonajeFactory.inicializarAuror()));
 		magos.add(new Estudiante("Hermione Granger", PersonajeFactory.inicializarEstudiante()));
 		magos.add(new Profesor("Albus Dumbledore", PersonajeFactory.inicializarProfesor()));
-		magos.add(new Estudiante("Ron Weasley", PersonajeFactory.inicializarEstudiante()));
+		magos.add(new Estudiante("Neville", PersonajeFactory.inicializarEstudiante()));
 		magos.add(new Auror("Nymphadora Tonks", PersonajeFactory.inicializarAuror()));
 
 		return magos;
@@ -146,7 +146,7 @@ public class PersonajeFactory {
 		mortifagos.add(new Seguidor("Lucius Malfoy", PersonajeFactory.inicializarSeguidor()));
 		mortifagos.add(new Comandante("Severus Snape", PersonajeFactory.inicializarComandante()));
 		mortifagos.add(new Seguidor("Antonin Dolohov", PersonajeFactory.inicializarSeguidor()));
-		mortifagos.add(new Comandante("Barty Crouch Jr.", PersonajeFactory.inicializarComandante()));
+		mortifagos.add(new Seguidor("Barty Crouch Jr.", PersonajeFactory.inicializarSeguidor()));
 
 		return mortifagos;
 	}

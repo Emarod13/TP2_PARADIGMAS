@@ -53,7 +53,7 @@ public class Batallon {
 	}
 
 	public void recuperarEnergia() {
-		int energiaRecuperada=50;
+		int energiaRecuperada=100;
 		for (Personaje p : this.miembros) {
 			p.recuperarEnergia(energiaRecuperada);
 		}

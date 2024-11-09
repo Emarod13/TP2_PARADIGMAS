@@ -3,9 +3,9 @@ package Hechizos;
 import Personajes.Personaje;
 
 public class LaceroMortis extends HechizoStrategy {
-	private static int DAÑO = 50;
-	private static int COSTO = 30;
-	private static int DURACION = 3;
+	private static int DAÑO = 100;
+	private static int COSTO = 120;
+	private static int DURACION = 1;
 
 	public LaceroMortis() {
 		super(COSTO, "Ataque");

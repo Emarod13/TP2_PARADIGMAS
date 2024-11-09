@@ -3,9 +3,9 @@ package Hechizos;
 import Personajes.Personaje;
 
 public class SomnumEternum extends HechizoStrategy {
-	private static int DAÑO = 100;
-	private static int COSTO = 30;
-	private static int DURACION = 3;
+	private static int DAÑO = 150;
+	private static int COSTO = 150;
+	private static int DURACION = 2;
 
 	public SomnumEternum() {
 		super(COSTO, "Ataque");

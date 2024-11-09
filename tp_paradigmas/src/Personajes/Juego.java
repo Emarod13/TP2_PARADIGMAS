@@ -35,7 +35,7 @@ public class Juego {
 	        Query retractDebilitadoQuery = new Query(retractDebilitado);
 	        retractDebilitadoQuery.hasSolution();
 
-	        System.out.println("Personaje " + nombre + " ha sido eliminado en Prolog (está muerto).");
+	    //    System.out.println("Personaje " + nombre + " ha sido eliminado en Prolog (está muerto).");
 	        return;
 	    }
 
@@ -199,7 +199,7 @@ public class Juego {
 			Term hechizos = resultado.get("HechizosDisponibles");
 
 			// Imprimir los hechizos disponibles que devuelve Prolog
-			System.out.println("Hechizos disponibles: " + hechizos);
+		//	System.out.println("Hechizos disponibles: " + hechizos);
 
 			// Convertir el término de lista a un array
 			if (hechizos.isList() && hechizos.arity() > 0) {
@@ -228,7 +228,7 @@ public class Juego {
 
 		if (consultaObjetivos.hasSolution()) {
 			String nombreObjetivo = consultaObjetivos.oneSolution().get("Objetivo").toString().replace("'", "");
-			System.out.println(nombreObjetivo);
+		//	System.out.println(nombreObjetivo);
 			for (Personaje enemigo : enemigos) {
 	            if (enemigo.getNombre().equals(nombreObjetivo)) {
 	                return enemigo;

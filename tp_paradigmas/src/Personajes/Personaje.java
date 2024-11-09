@@ -89,7 +89,7 @@ public abstract class Personaje {
 
 	public void procesarEfectos() {
 		// Itera sobre los efectos y los aplica en cada round
-		final int DAÑO_SANGRADO = 40;
+		final int DAÑO_SANGRADO = 25;
 		final int AGOTAMIENTO = 40;
 		efectos_aplicados.forEach((efecto, duracion) -> {
 			if (duracion > 0) {

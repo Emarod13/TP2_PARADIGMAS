@@ -4,7 +4,7 @@ import Personajes.Personaje;
 
 public class Episkey extends HechizoStrategy {
 	private static int CURACION = 100;
-	private static int COSTO=30;
+	private static int COSTO=75;
 	public Episkey() {
 		super(COSTO,"Defensa");
 	}

@@ -5,7 +5,7 @@ import Personajes.Personaje;
 public class LuxExterminus extends HechizoStrategy {
 	
 	private static double PORCENTAJE = 0.3;
-	private static int COSTO = 50;
+	private static int COSTO = 180;
 	public LuxExterminus() {
 		super(COSTO, "Ataque");
 		// TODO Auto-generated constructor stub

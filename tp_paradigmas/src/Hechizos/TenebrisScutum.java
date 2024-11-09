@@ -4,8 +4,8 @@ import Personajes.Personaje;
 
 public class TenebrisScutum extends HechizoStrategy {
 
-	private static int DURACION = 3;
-	private static int COSTO = 30;
+	private static int DURACION = 1;
+	private static int COSTO = 75;
 
 	public TenebrisScutum() {
 		super(COSTO, "Defensa");

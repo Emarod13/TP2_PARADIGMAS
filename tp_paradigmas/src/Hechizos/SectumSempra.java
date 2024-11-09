@@ -5,7 +5,7 @@ import Personajes.Personaje;
 public class SectumSempra extends HechizoStrategy { // COMANDANTE, SEGUIDOR
 	private static int DAÑO = 100;
 	private static int DURACION = 3;
-	private static int COSTO=30;
+	private static int COSTO=120;
 	public SectumSempra() {
 		super(COSTO,"Ataque");
 	}

@@ -3,8 +3,8 @@ package Hechizos;
 import Personajes.Personaje;
 
 public class ExpectoPatronum extends HechizoStrategy { // PROFESOR
-	private static int DAÑO = 100;
-	private static int COSTO=30;
+	private static int DAÑO = 150;
+	private static int COSTO=100;
 	public ExpectoPatronum() {
 		super(COSTO,"Ataque");
 	}
