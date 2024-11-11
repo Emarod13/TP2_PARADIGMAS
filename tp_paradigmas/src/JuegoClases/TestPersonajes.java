@@ -13,6 +13,22 @@ public class TestPersonajes {
 	private Personaje prueba = new Comandante("Bellatrix Lestrange",new HashMap<>());;
 	
 	@Test
+	public void atacarSinEnergia () {
+		System.out.println("************************************************************");
+		int energiaInicial = 175;
+		Personaje atacante = new Seguidor("Atacante de prueba", new HashMap<>());
+		Personaje objetivo = new Estudiante("Objetivo de Prueba", new HashMap<>());
+		AvadaKedavra hechizo = new AvadaKedavra();
+		atacante.getLista_de_hechizos().put(hechizo.getNombre(), hechizo);
+		
+		//Energia inferior al hechizo que usara
+		
+		atacante.atacar(objetivo, hechizo.getNombre());
+		
+		assertEquals(atacante.energia_inicial, energiaInicial);
+		System.out.println("************************************************************");
+	}
+	@Test
 	public void recuperarEnergia() {
 		int energia=20;
 		prueba.recuperarEnergia(20);
@@ -81,8 +97,8 @@ public class TestPersonajes {
 		test.atacar(objetivo, "ExpectoPatronum"); // al estar desarmado, no deberia poder atacar
 		assertEquals(objetivo.getPuntos_de_vida(), objetivo.getVida_inicial());
 
-		test.procesarEfectos(); // en este turno, el sangrado no tendria que haber hecho daño
-		assertEquals(test.getPuntos_de_vida(), test.getVida_inicial() - 10); // con daño del sangrado
+		test.procesarEfectos(); 
+		assertEquals(test.getPuntos_de_vida(), test.getVida_inicial() - 25); // con daño del sangrado
 
 		test.atacar(objetivo, "ExpectoPatronum"); // al estar el objetivo protegido, no deberia poder atacar
 		assertEquals(objetivo.getPuntos_de_vida(), objetivo.getVida_inicial());
@@ -92,7 +108,7 @@ public class TestPersonajes {
 		assertEquals(objetivo.getPuntos_de_vida(), objetivo.getVida_inicial() - hechizo.getDaño());
 
 		test.procesarEfectos(); // en este turno si
-		assertEquals(test.getPuntos_de_vida(), test.getVida_inicial() - 20); // con daño del sangrado
+		assertEquals(test.getPuntos_de_vida(), test.getVida_inicial() - 50); // con daño del sangrado
 
 	}
 	@Test
@@ -105,10 +121,10 @@ public class TestPersonajes {
 
 		magos.procesarEfectos();
 		magos.getMiembros()
-				.forEach(personaje -> assertEquals(personaje.getPuntos_de_vida(), personaje.getVida_inicial() - 10));
+				.forEach(personaje -> assertEquals(personaje.getPuntos_de_vida(), personaje.getVida_inicial() - 25));
 		mortifagos.procesarEfectos();
 		mortifagos.getMiembros()
-				.forEach(personaje -> assertEquals(personaje.getPuntos_de_vida(), personaje.getVida_inicial() - 10));
+				.forEach(personaje -> assertEquals(personaje.getPuntos_de_vida(), personaje.getVida_inicial() - 25));
 
 		magos.getMiembros().forEach(personaje -> personaje.morir());
 
