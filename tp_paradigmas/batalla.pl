@@ -24,11 +24,6 @@ decidir_accion(Puntos_vida, Enemigos_debilitados, 'Defender') :-
 % Fallback: Si ninguna de las anteriores se cumple, elige Atacar por defecto
 decidir_accion(_, _, 'Atacar').
 
-
-% Regla para decidir consumir objeto: consume si su vida es menor al 50% y hay pocos enemigos debilitados
-decidir_accion(Puntos_vida, Enemigos_debilitados, 'Consumir') :-
-    Puntos_vida < 50, Enemigos_debilitados < 2.
-
 %hechizo(Nombre,Personaje, Costo, Tipo).
 hechizos_disponibles(NombrePersonaje, Energia, Tipo, HechizosDisponibles) :-
     findall(Nombre, (hechizo(Nombre, NombrePersonaje, Costo, Tipo), Costo =< Energia), HechizosDisponibles).
