@@ -65,7 +65,7 @@ public class TestFuncionalidades {
 		assertEquals(test.getPuntos_de_vida(), test.getVida_inicial() - 20); // con daño del sangrado
 
 	}
-
+	
 	@Test
 	public void BatallonesFuncionalidades() {
 		Batallon magos = new Batallon(new ArrayList<>(PersonajeFactory.generarMagos()));

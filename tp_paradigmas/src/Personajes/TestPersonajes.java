@@ -9,9 +9,10 @@ import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;
 
+import Hechizos.AvadaKedavra;
 import Hechizos.Episkey;
 import Hechizos.ExpectoPatronum;
-
+import Hechizos.HechizoFactory;
 import Hechizos.SectumSempra;
 
 public class TestPersonajes {
@@ -23,6 +24,24 @@ public class TestPersonajes {
 		prueba.recuperarEnergia(20);
 		assertEquals(prueba.getEnergia(), prueba.energia_inicial+energia);
 	}
+	
+	@Test
+	public void atacarSinEnergia () {
+		System.out.println("************************************************************");
+		int energiaInicial = 175;
+		Personaje atacante = new Seguidor("Atacante de prueba", new HashMap<>());
+		Personaje objetivo = new Estudiante("Objetivo de Prueba", new HashMap<>());
+		AvadaKedavra hechizo = new AvadaKedavra();
+		atacante.getLista_de_hechizos().put(hechizo.getNombre(), hechizo);
+		
+		//Energia inferior al hechizo que usara
+		
+		atacante.atacar(objetivo, hechizo.getNombre());
+		
+		assertEquals(atacante.energia_inicial, energiaInicial);
+		System.out.println("************************************************************");
+	}
+	
 	@Test
 	public void estaDebilitado() {
 		prueba.setPuntos_de_vida((int) (prueba.getVida_inicial()*0.4));
@@ -51,7 +70,7 @@ public class TestPersonajes {
 	}
 	@Test
 	public void pruebaMorir() {
-		prueba.morir();;
+		prueba.morir();
 		
 		assertFalse(prueba.isVivo());
 	
