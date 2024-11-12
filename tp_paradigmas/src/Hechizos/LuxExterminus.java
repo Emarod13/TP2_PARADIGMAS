@@ -8,7 +8,7 @@ public class LuxExterminus extends HechizoStrategy {
 	private static int COSTO = 180;
 	public LuxExterminus() {
 		super(COSTO, "Ataque");
-		// TODO Auto-generated constructor stub
+
 	}
 	@Override
 	public void ejecutar(Personaje p) {
@@ -24,12 +24,12 @@ public class LuxExterminus extends HechizoStrategy {
 	}
 	@Override
 	public String getTipo() {
-		// TODO Auto-generated method stub
+		
 		return this.tipo;
 	}
 	@Override
 	public String getNombre() {
-		// TODO Auto-generated method stub
+	
 		return "LuxExterminus";
 	}
 

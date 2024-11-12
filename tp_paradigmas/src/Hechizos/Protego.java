@@ -16,12 +16,12 @@ public class Protego extends HechizoStrategy { // ESTUDIANTE
 	}
 	@Override
 	public String getTipo() {
-		// TODO Auto-generated method stub
+	
 		return this.tipo;
 	}
 	@Override
 	public String getNombre() {
-		// TODO Auto-generated method stub
+		
 		return "Protego";
 	}
 

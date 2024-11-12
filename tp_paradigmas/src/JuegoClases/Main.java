@@ -2,6 +2,9 @@ package JuegoClases;
 
 import java.util.Random;
 
+import Personajes.Batallon;
+import Personajes.PersonajeFactory;
+
 
 public class Main {
 	public static void main(String[] args) {
@@ -14,8 +17,8 @@ public class Main {
 		juego.cargarOActualizarPersonajeEnProlog(mortifagos.getMiembros());
 		juego.cargarHechizosEnProlog(magos.getMiembros());
 		juego.cargarHechizosEnProlog(mortifagos.getMiembros());
-		System.out.println("TODO CARGADO EN PROLOG, COMIENZA EL JUEGO!!!!");
 		System.out.println("-------------------------------------------");
+		System.out.println("TODO CARGADO EN PROLOG, COMIENZA EL JUEGO!!!!");
 		System.out.println("-------------------------------------------");
 		
 
@@ -29,8 +32,8 @@ public class Main {
 				mortifagos.recuperarEnergia();
 				juego.cargarOActualizarPersonajeEnProlog(magos.getMiembros());
 				juego.cargarOActualizarPersonajeEnProlog(mortifagos.getMiembros());
-				System.out.println("SIGUIENTE RONDA!!!!");
 				System.out.println("-------------------------------------------");
+				System.out.println("TODO LISTO, SIGUIENTE RONDA!!!!");
 				System.out.println("-------------------------------------------");
 			} else {
 				mortifagos.atacar(magos, juego);
@@ -41,19 +44,20 @@ public class Main {
 				magos.recuperarEnergia();
 				juego.cargarOActualizarPersonajeEnProlog(magos.getMiembros());
 				juego.cargarOActualizarPersonajeEnProlog(mortifagos.getMiembros());
-				System.out.println("SIGUIENTE RONDA!!!!");
 				System.out.println("-------------------------------------------");
+				System.out.println("TODO LISTO, SIGUIENTE RONDA!!!!");
 				System.out.println("-------------------------------------------");
+			
 
 			}
 
 		} while (magos.tienePersonajesVivos() && mortifagos.tienePersonajesVivos());
 		
 		if(magos.tienePersonajesVivos()) {
-			System.out.println("magos ganadores!!");
+			System.out.println("Magos ganadores!!");
 		}
 		else {
-			System.out.println("mortifagos ganadores!!");
+			System.out.println("Mortifagos ganadores!!");
 		}
 
 	}

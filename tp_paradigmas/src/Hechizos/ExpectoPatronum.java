@@ -23,13 +23,13 @@ public class ExpectoPatronum extends HechizoStrategy { // PROFESOR
 
 	@Override
 	public String getTipo() {
-		// TODO Auto-generated method stub
+
 		return this.tipo;
 	}
 
 	@Override
 	public String getNombre() {
-		// TODO Auto-generated method stub
+	
 		return "ExpectoPatronum";
 	}
 	public int getDaño() {

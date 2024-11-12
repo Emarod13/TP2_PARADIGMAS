@@ -11,7 +11,7 @@ public abstract class HechizoStrategy {
 	}
 	public abstract void  ejecutar(Personaje p);
 	public int getCostoEnergia() {
-		// TODO Auto-generated method stub
+	
 		return costo;
 	}
 	public abstract String getTipo();

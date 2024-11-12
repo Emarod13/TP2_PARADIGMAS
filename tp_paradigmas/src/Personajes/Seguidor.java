@@ -2,7 +2,6 @@ package Personajes;
 
 import java.util.Map;
 
-
 import Hechizos.HechizoStrategy;
 
 public class Seguidor extends Mortifago{
@@ -13,7 +12,7 @@ public class Seguidor extends Mortifago{
 
 	public Seguidor(String nombre, Map<String,HechizoStrategy> hechizos ) {
 		super(nombre,  puntos_de_vida, energia, hechizos);
-		// TODO Auto-generated constructor stub
+	
 	}
 
 }

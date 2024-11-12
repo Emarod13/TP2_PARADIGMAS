@@ -9,7 +9,7 @@ public class LaceroMortis extends HechizoStrategy {
 
 	public LaceroMortis() {
 		super(COSTO, "Ataque");
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Override
@@ -28,13 +28,13 @@ public class LaceroMortis extends HechizoStrategy {
 
 	@Override
 	public String getTipo() {
-		// TODO Auto-generated method stub
+	
 		return this.tipo;
 	}
 
 	@Override
 	public String getNombre() {
-		// TODO Auto-generated method stub
+		
 		return "LaceroMortis";
 	}
 

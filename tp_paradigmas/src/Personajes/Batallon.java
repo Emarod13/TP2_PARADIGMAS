@@ -3,6 +3,8 @@ package Personajes;
 import java.util.ArrayList;
 import java.util.List;
 
+import JuegoClases.Juego;
+
 public class Batallon {
 	private List<Personaje> miembros;
 
@@ -42,6 +44,7 @@ public class Batallon {
 				return;
 			}
 			juego.actuar(p, enemigos.getMiembros());
+			System.out.println("");
 		}
 
 	}

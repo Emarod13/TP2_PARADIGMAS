@@ -2,7 +2,6 @@ package Personajes;
 
 import java.util.Map;
 
-
 import Hechizos.HechizoStrategy;
 
 public class Profesor extends Mago{
@@ -14,7 +13,6 @@ public class Profesor extends Mago{
 	
 	public Profesor(String nombre, Map<String,HechizoStrategy> hechizos ) {
 		super(nombre,  puntos_de_vida, energia, hechizos);
-		// TODO Auto-generated constructor stub
 	}
 
 }

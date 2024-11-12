@@ -3,6 +3,9 @@ package JuegoClases;
 import org.jpl7.Query;
 import org.jpl7.Term;
 
+import Hechizos.HechizoStrategy;
+import Personajes.Personaje;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -87,8 +90,7 @@ public class Juego {
 	 */
 	public String tomarDecision(Personaje personaje, List<Personaje> enemigos) {
 		// Actualizar el estado debilitado de este personaje y de sus enemigos en Prolog
-		//cargarOActualizarPersonajeEnProlog(personaje);
-		//enemigos.forEach(this::cargarOActualizarPersonajeEnProlog);
+
 		try {
 	        Thread.sleep(200); // 100 ms de pausa
 	    } catch (InterruptedException e) {
@@ -160,11 +162,7 @@ public class Juego {
 				System.out.println(personaje.getNombre() + " no tiene hechizos de defensa disponibles.");
 			}
 			break;
-		/*
-		 * case "consumir": personaje.consumirObjeto();
-		 * System.out.println(personaje.getNombre() +
-		 * " consume un objeto para recuperar energía"); break;
-		 */
+
 		default:
 			System.out.println("Acción no reconocida");
 			break;
@@ -176,9 +174,9 @@ public class Juego {
 		String nombrePersonaje = personaje.getNombre();
 
 		// Imprimir los valores de depuración
-	//	System.out.println("Energía actual de " + nombrePersonaje + ": " + energiaActual);
-	//	System.out.println("Vida actual de " + nombrePersonaje + ": " + personaje.getPuntos_de_vida());
-	//	System.out.println("Tipo de hechizo solicitado: " + tipo);
+	System.out.println("Energía actual de " + nombrePersonaje + ": " + energiaActual);
+	System.out.println("Vida actual de " + nombrePersonaje + ": " + personaje.getPuntos_de_vida());
+
 
 		// Crear la consulta para Prolog
 		String consulta = "hechizos_disponibles('" + nombrePersonaje + "', " + energiaActual + ", '" + tipo
@@ -196,7 +194,7 @@ public class Juego {
 			Term hechizos = resultado.get("HechizosDisponibles");
 
 			// Imprimir los hechizos disponibles que devuelve Prolog
-		//	System.out.println("Hechizos disponibles: " + hechizos);
+			System.out.println("Hechizos disponibles: " + hechizos);
 
 			// Convertir el término de lista a un array
 			if (hechizos.isList() && hechizos.arity() > 0) {

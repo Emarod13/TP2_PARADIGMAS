@@ -1,6 +1,5 @@
 package Personajes;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,11 +9,11 @@ public abstract class Personaje {
 	protected String nombre;
 	protected int puntos_de_vida;
 	protected Map<String, HechizoStrategy> lista_de_hechizos;
-	protected Map<String, Integer> efectos_aplicados;
+	private Map<String, Integer> efectos_aplicados;
 	protected boolean vivo = true;
 	protected final int vida_inicial;
 	protected int energia;
-	protected final int energia_inicial;
+	private final int energia_inicial;
 
 	public Personaje(String nombre,  int puntos_de_vida, int energia,
 			Map<String, HechizoStrategy> hechizos) {
@@ -24,7 +23,7 @@ public abstract class Personaje {
 		this.vida_inicial = puntos_de_vida;
 		this.energia = energia;
 		this.energia_inicial = energia;
-		this.efectos_aplicados = new HashMap<>();
+		this.setEfectos_aplicados(new HashMap<>());
 
 	}
 
@@ -53,11 +52,11 @@ public abstract class Personaje {
 	}
 
 	public boolean isDesarmado() {
-		return efectos_aplicados.containsKey("Desarmado") && efectos_aplicados.get("Desarmado") > 0;
+		return getEfectos_aplicados().containsKey("Desarmado") && getEfectos_aplicados().get("Desarmado") > 0;
 	}
 
 	public boolean isProtegido() {
-		return efectos_aplicados.containsKey("Protegido") && efectos_aplicados.get("Protegido") > 0;
+		return getEfectos_aplicados().containsKey("Protegido") && getEfectos_aplicados().get("Protegido") > 0;
 	}
 
 	public int getVida_inicial() {
@@ -84,7 +83,7 @@ public abstract class Personaje {
 
 	public void aplicarEfecto(String efecto, int duracion) {
 		if(duracion>0) {
-			efectos_aplicados.put(efecto, duracion); // Aplica un efecto con una duración
+			getEfectos_aplicados().put(efecto, duracion); // Aplica un efecto con una duración
 		}
 	}
 
@@ -92,7 +91,7 @@ public abstract class Personaje {
 		// Itera sobre los efectos y los aplica en cada round
 		final int DAÑO_SANGRADO = 25;
 		final int AGOTAMIENTO = 40;
-		efectos_aplicados.forEach((efecto, duracion) -> {
+		getEfectos_aplicados().forEach((efecto, duracion) -> {
 			if (duracion > 0) {
 				switch (efecto) {
 				case "Sangrado":
@@ -110,12 +109,12 @@ public abstract class Personaje {
 					System.out.println(nombre + " sufre de agotamiento, pierde 40 puntos de energia");
 					break;
 				}
-				efectos_aplicados.put(efecto, duracion - 1); // Reducir duración del efecto
+				getEfectos_aplicados().put(efecto, duracion - 1); // Reducir duración del efecto
 			}
 		});
 
 		// Eliminar efectos que ya no tienen duración
-		efectos_aplicados.entrySet().removeIf(entry -> entry.getValue() <= 0);
+		getEfectos_aplicados().entrySet().removeIf(entry -> entry.getValue() <= 0);
 	}
 
 	public void atacar(Personaje enemigo, String hechizoNombre) {
@@ -162,11 +161,7 @@ public abstract class Personaje {
 
 	}
 
-	public void consumir(Personaje personaje) {
-		// TODO Auto-generated method stub
-
-	}
-
+	
 	public void recibirDaño(int daño) {
 			this.puntos_de_vida -= daño;
 			if (this.puntos_de_vida <= 0) {
@@ -178,6 +173,18 @@ public abstract class Personaje {
 	}
 		
 	
-	protected abstract String getTipo(); // usado mas que nada para las consultas de prolog
+	public abstract String getTipo(); // usado mas que nada para las consultas de prolog
+
+	public int getEnergia_inicial() {
+		return energia_inicial;
+	}
+
+	public Map<String, Integer> getEfectos_aplicados() {
+		return efectos_aplicados;
+	}
+
+	public void setEfectos_aplicados(Map<String, Integer> efectos_aplicados) {
+		this.efectos_aplicados = efectos_aplicados;
+	}
 
 }

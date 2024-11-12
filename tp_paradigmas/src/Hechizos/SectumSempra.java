@@ -30,13 +30,13 @@ public class SectumSempra extends HechizoStrategy { // COMANDANTE, SEGUIDOR
 
 	@Override
 	public String getTipo() {
-		// TODO Auto-generated method stub
+
 		return this.tipo;
 	}
 
 	@Override
 	public String getNombre() {
-		// TODO Auto-generated method stub
+	
 		return "SectumSempra";
 	}
 	public int getDaño() {

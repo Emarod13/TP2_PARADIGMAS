@@ -9,7 +9,7 @@ public class TenebrisScutum extends HechizoStrategy {
 
 	public TenebrisScutum() {
 		super(COSTO, "Defensa");
-		// TODO Auto-generated constructor stub
+	
 	}
 
 	@Override
@@ -20,13 +20,13 @@ public class TenebrisScutum extends HechizoStrategy {
 
 	@Override
 	public String getTipo() {
-		// TODO Auto-generated method stub
+	
 		return this.tipo;
 	}
 
 	@Override
 	public String getNombre() {
-		// TODO Auto-generated method stub
+		
 		return "TenebrisScutum";
 	}
 

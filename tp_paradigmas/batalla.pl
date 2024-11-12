@@ -9,7 +9,7 @@ objetivos_recomendados(Nombre,Tipo):-personaje(Nombre,Tipo,Vida,_),esta_debilita
 % Reglas de decisión básicas en Prolog
 % Regla para decidir atacar: ataca si hay enemigos debilitados
 
-% Atacar si los puntos de vida son mayores a 100
+% Atacar si los puntos de vida son mayores a 150
 decidir_accion(Puntos_vida, _, 'Atacar') :- 
     Puntos_vida > 150.
 

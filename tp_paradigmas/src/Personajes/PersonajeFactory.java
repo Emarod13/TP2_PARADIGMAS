@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-
 import Hechizos.AvadaKedavra;
 import Hechizos.Episkey;
 import Hechizos.ExpectoPatronum;
@@ -18,6 +17,8 @@ import Hechizos.Protego;
 import Hechizos.SectumSempra;
 import Hechizos.SomnumEternum;
 import Hechizos.TenebrisScutum;
+
+
 
 public class PersonajeFactory {
 	private static Random rand = new Random();
